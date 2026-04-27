@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VTN Tools — ศูนย์รวมอะไหล่เครื่องมือช่าง</title>
+<link rel="icon" href="logo/favicon-16x16.png">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Kanit',sans-serif;background:#0d0d0d;color:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,13,13,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.nav-logo img{height:40px;border-radius:8px}
+.nav-brand{font-size:20px;font-weight:700;color:#fff}
+.nav-brand span{color:#2563EB}
+.nav-links{display:flex;gap:24px;font-size:14px;font-weight:400}
+a.nav-links{color:rgba(255,255,255,.6);transition:.2s}
+.nav-links a:hover{color:#2563EB}
+.nav-cta{display:flex;gap:10px;align-items:center}
+.nav-cta a{padding:8px 18px;border-radius:8px;font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;transition:.2s}
+.btn-line{background:#06C755;color:#fff}
+.btn-call{background:#2563EB;color:#fff}
+
+/* HERO */
+.hero{margin-top:64px;position:relative;min-height:85vh;display:flex;align-items:center;overflow:hidden}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(1)}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.65) 0%,rgba(0,0,0,.15) 60%,rgba(0,0,0,.45) 100%)}
+.hero-content{position:relative;z-index:2;padding:60px 48px;max-width:650px;background:rgba(0,0,0,.45);backdrop-filter:blur(8px);border-radius:20px;border:1px solid rgba(255,255,255,.15);margin:40px}
+.hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(37,99,235,.2);border:1px solid rgba(37,99,235,.4);color:#93C5FD;padding:6px 16px;border-radius:20px;font-size:13px;font-weight:500;margin-bottom:20px}
+.hero h1{font-size:48px;font-weight:800;line-height:1.2;margin-bottom:16px;color:#fff}
+.hero h1 span{color:#60A5FA}
+.hero-desc{font-size:16px;color:rgba(255,255,255,.8);line-height:1.8;margin-bottom:28px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.hbtn{padding:14px 28px;border-radius:12px;font-size:15px;font-weight:600;border:none;cursor:pointer;transition:.2s;display:flex;align-items:center;gap:8px}
+.hbtn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.hbtn-primary{background:linear-gradient(135deg,#2563EB,#3B82F6);color:#fff}
+.hbtn-secondary{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#fff}
+.hero-stats{display:flex;gap:32px;margin-top:32px}
+.hero-stat{text-align:center}
+.hero-stat .num{font-size:28px;font-weight:800;color:#60A5FA}
+.hero-stat .lbl{font-size:12px;color:rgba(255,255,255,.6);margin-top:2px}
+
+/* SECTION */
+.section{padding:80px 32px;max-width:1200px;margin:0 auto}
+.section-header{text-align:center;margin-bottom:48px}
+.section-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);color:#3B82F6;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:500;margin-bottom:12px}
+.section-title{font-size:32px;font-weight:700;margin-bottom:8px;color:#fff}
+.section-sub{font-size:15px;color:rgba(255,255,255,.5)}
+
+/* PRODUCTS */
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.product-card{background:#1a1a1a;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.06);transition:.3s;position:relative}
+.product-card:hover{transform:translateY(-6px);border-color:rgba(37,99,235,.3);box-shadow:0 12px 32px rgba(37,99,235,.1)}
+.product-badge{position:absolute;top:12px;left:12px;z-index:2;background:linear-gradient(135deg,#2563EB,#3B82F6);color:#fff;padding:4px 12px;border-radius:8px;font-size:11px;font-weight:600}
+.product-img{height:220px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a1a1a,#222);overflow:hidden}
+.product-img img{max-height:190px;max-width:85%;object-fit:contain;transition:.3s}
+.product-card:hover .product-img img{transform:scale(1.05)}
+.product-info{padding:18px}
+.product-brand{font-size:11px;color:#2563EB;font-weight:500;margin-bottom:4px;text-transform:uppercase;letter-spacing:1px}
+.product-name{font-size:15px;font-weight:600;margin-bottom:6px;color:#fff}
+.product-desc{font-size:12px;color:#888;line-height:1.6;margin-bottom:12px}
+.product-footer{display:flex;justify-content:space-between;align-items:center}
+.product-price{font-size:18px;font-weight:700;color:#2563EB}
+.product-price small{font-size:12px;color:#aaa;font-weight:400}
+.product-action{background:rgba(37,99,235,.1);border:1px solid rgba(37,99,235,.2);color:#3B82F6;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:500;cursor:pointer;transition:.2s}
+.product-action:hover{background:#2563EB;color:#fff}
+
+/* CATEGORIES */
+.cat-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.cat-card{background:#1a1a1a;border-radius:14px;padding:24px 16px;text-align:center;border:1px solid rgba(255,255,255,.06);transition:.2s;cursor:pointer}
+.cat-card:hover{border-color:rgba(37,99,235,.3);transform:translateY(-3px)}
+.cat-icon{font-size:36px;margin-bottom:10px}
+.cat-name{font-size:13px;font-weight:500;color:rgba(255,255,255,.8)}
+
+/* TRUST */
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.trust-card{background:#1a1a1a;border-radius:14px;padding:28px 20px;text-align:center;border:1px solid rgba(255,255,255,.06)}
+.trust-icon{font-size:36px;margin-bottom:12px}
+.trust-title{font-size:14px;font-weight:600;margin-bottom:6px;color:#fff}
+.trust-text{font-size:12px;color:#888;line-height:1.6}
+
+/* REVIEWS */
+.reviews-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.review-card{background:#1a1a1a;border-radius:14px;padding:24px;border:1px solid rgba(255,255,255,.06)}
+.review-top{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.review-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#2563EB,#3B82F6);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff}
+.review-meta .review-name{font-size:13px;font-weight:600;color:#fff}
+.review-meta .review-date{font-size:11px;color:rgba(255,255,255,.4)}
+.review-stars{color:#F59E0B;font-size:13px;margin-bottom:10px}
+.review-text{font-size:13px;color:#555;line-height:1.8}
+.review-product{display:inline-block;background:rgba(37,99,235,.1);color:#3B82F6;padding:3px 10px;border-radius:6px;font-size:10px;font-weight:500;margin-top:10px}
+
+/* CONTACT */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.contact-left h2{font-size:28px;font-weight:700;margin-bottom:8px;color:#fff}
+.contact-left h2 span{color:#2563EB}
+.contact-left p{font-size:14px;color:#888;margin-bottom:24px}
+.contact-item{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.contact-icon{width:44px;height:44px;border-radius:12px;background:rgba(37,99,235,.1);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.contact-detail .contact-label{font-size:12px;color:#aaa;margin-bottom:2px}
+.contact-detail .contact-value{font-size:14px;font-weight:500;color:#fff}
+.contact-links{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}
+.contact-link{display:flex;align-items:center;gap:8px;padding:12px 20px;border-radius:12px;font-size:13px;font-weight:500;transition:.2s;border:1px solid rgba(255,255,255,.06);background:#fff}
+.contact-link:hover{transform:translateY(-2px)}
+.cl-line{border-color:rgba(6,199,85,.3);color:#06C755}
+.cl-fb{border-color:rgba(24,119,242,.3);color:#1877F2}
+.cl-shopee{border-color:rgba(238,77,45,.3);color:#EE4D2D}
+.contact-right{text-align:center}
+.contact-qr-box{background:#1a1a1a;border-radius:16px;padding:24px;border:1px solid rgba(255,255,255,.06)}
+.contact-qr-box img{max-width:200px;border-radius:12px;margin-bottom:12px}
+.contact-qr-box .qr-label{font-size:13px;color:rgba(255,255,255,.5)}
+.contact-shop-img{margin-top:16px}
+.contact-shop-img img{width:100%;border-radius:12px}
+
+/* MAP */
+.map-wrap{max-width:1200px;margin:0 auto;padding:0 32px 40px}
+.map-frame{border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.06)}
+
+/* FOOTER */
+.footer{background:#1a1a2e;padding:40px 32px;text-align:center}
+.footer-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px}
+.footer-logo img{height:32px;border-radius:6px}
+.footer-brand{font-size:16px;font-weight:600;color:#fff}
+.footer-brand span{color:#60A5FA}
+.footer-text{font-size:12px;color:rgba(255,255,255,.4);margin-bottom:8px}
+.footer-brands{font-size:12px;color:rgba(255,255,255,.25)}
+
+/* FLOAT */
+.float-line{position:fixed;bottom:24px;right:24px;z-index:999;background:#06C755;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 4px 20px rgba(6,199,85,.4);transition:.2s}
+.float-line:hover{transform:scale(1.1)}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(30px);transition:.6s}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+.hero h1{font-size:32px}
+.hero-content{padding:40px 24px;max-width:100%;margin:20px}
+.products-grid{grid-template-columns:repeat(2,1fr)}
+.cat-grid{grid-template-columns:repeat(3,1fr)}
+.trust-grid{grid-template-columns:repeat(2,1fr)}
+.reviews-wrap{grid-template-columns:1fr}
+.contact-wrap{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+.nav-links{display:none}
+.hero h1{font-size:26px}
+.hero{min-height:70vh}
+.hero-stats{gap:20px}
+.hero-stat .num{font-size:22px}
+.products-grid{grid-template-columns:1fr}
+.cat-grid{grid-template-columns:repeat(2,1fr)}
+.trust-grid{grid-template-columns:1fr}
+.section{padding:48px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+<div class="nav-logo">
+<img src="logo/LOGO-VTN-PNG.png" alt="VTN Tools">
+<div class="nav-brand">VTN<span>Tools</span></div>
+</div>
+<div class="nav-links">
+<a href="#products">สินค้า</a>
+<a href="#categories">หมวดหมู่</a>
+<a href="#reviews">รีวิว</a>
+<a href="#contact">ติดต่อ</a>
+</div>
+<div class="nav-cta">
+<a href="tel:0625646351" class="btn-call">📞 โทร</a>
+<a href="https://line.me/ti/p/0625646351" target="_blank" class="btn-line">💬 Line</a>
+</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-bg"><img src="hero/Hero Banner VTN Tools.png" alt="VTN Tools"></div>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<div class="hero-tag">🔧 อะไหล่คุณภาพดี · ส่งเร็วทั่วไทย</div>
+<h1>ศูนย์รวม<span>อะไหล่เครื่องมือช่าง</span><br>ครบวงจร</h1>
+<p class="hero-desc">แปรงถ่าน ลูกปืน หัวสว่าน สวิตซ์ ทุ่น ฟิลคอยล์<br>DCA · Makita · Maktec · Bosch · Hitachi · INGCO</p>
+<div class="hero-btns">
+<a href="https://line.me/ti/p/0625646351" target="_blank" class="hbtn hbtn-primary">💬 สอบถามผ่าน Line</a>
+<a href="https://shopee.co.th/shop/1684979116" target="_blank" class="hbtn hbtn-secondary">🛒 ร้าน Shopee</a>
+</div>
+<div class="hero-stats">
+<div class="hero-stat"><div class="num">100+</div><div class="lbl">รายการสินค้า</div></div>
+<div class="hero-stat"><div class="num">4.9⭐</div><div class="lbl">คะแนนร้าน</div></div>
+<div class="hero-stat"><div class="num">1K+</div><div class="lbl">ชิ้นขายแล้ว</div></div>
+<div class="hero-stat"><div class="num">5+</div><div class="lbl">แบรนด์ชั้นนำ</div></div>
+</div>
+</div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="section" id="products">
+<div class="section-header">
+<div class="section-badge">🔧 สินค้าเด่น</div>
+<div class="section-title">อะไหล่คุณภาพ ราคาดี</div>
+<div class="section-sub">จัดส่งทั่วไทย คุณภาพรับประกัน</div>
+</div>
+<div class="products-grid">
+<div class="product-card fade-up">
+<div class="product-badge">🔥 ขายดี</div>
+<div class="product-img"><img src="products/แปรงถ่าน 7-100.png" alt="แปรงถ่าน Bosch"></div>
+<div class="product-info">
+<div class="product-brand">Bosch</div>
+<div class="product-name">แปรงถ่าน GWS 7-100</div>
+<div class="product-desc">แปรงถ่านคาร์บอน ขั้วทองแดง สำหรับหินเจียร์ Bosch GWS 7-100 / GWS7-100ET แบบขาเสียบ</div>
+<div class="product-footer">
+<div class="product-price">฿279 <small>/ คู่</small></div>
+<a href="https://shopee.co.th/shop/1684979116" target="_blank" class="product-action">ซื้อเลย →</a>
+</div>
+</div>
+</div>
+<div class="product-card fade-up">
+<div class="product-badge">🔥 ขายดี</div>
+<div class="product-img"><img src="products/หัวสว่าน.png" alt="หัวสว่าน"></div>
+<div class="product-info">
+<div class="product-brand">Multi-Brand</div>
+<div class="product-name">หัวสว่าน</div>
+<div class="product-desc">หัวสว่านคุณภาพดี สำหรับเครื่องเจาะ ขนาดหลากหลาย ใช้ได้กับงานเจาะทั่วไป</div>
+<div class="product-footer">
+<div class="product-price">สอบถาม</div>
+<a href="https://line.me/ti/p/0625646351" target="_blank" class="product-action">ถาม Line →</a>
+</div>
+</div>
+</div>
+<div class="product-card fade-up">
+<div class="product-badge">⭐ ยอดนิยม</div>
+<div class="product-img"><img src="products/ตลับลูกปืน.png" alt="ตลับลูกปืน"></div>
+<div class="product-info">
+<div class="product-brand">Multi-Brand</div>
+<div class="product-name">ตลับลูกปืน</div>
+<div class="product-desc">ตลับลูกปืนคุณภาพดี ทนทาน เหมาะสำหรับงานหนัก เครื่องมือช่างทุกชนิด</div>
+<div class="product-footer">
+<div class="product-price">สอบถาม</div>
+<a href="https://line.me/ti/p/0625646351" target="_blank" class="product-action">ถาม Line →</a>
+</div>
+</div>
+</div>
+<div class="product-card fade-up">
+<div class="product-img"><img src="products/สวิตซ์ 2-26.png" alt="สวิตซ์"></div>
+<div class="product-info">
+<div class="product-brand">อะไหล่ไฟฟ้า</div>
+<div class="product-name">สวิตซ์เครื่องมือช่าง</div>
+<div class="product-desc">สวิตซ์เปิดปิดสำหรับเครื่องมือช่างหลายรุ่น เปลี่ยนเองง่าย ใช้งานสะดวก</div>
+<div class="product-footer">
+<div class="product-price">สอบถาม</div>
+<a href="https://line.me/ti/p/0625646351" target="_blank" class="product-action">ถาม Line →</a>
+</div>
+</div>
+</div>
+<div class="product-card fade-up">
+<div class="product-img"><img src="products/ทุ่น.png" alt="ทุ่น"></div>
+<div class="product-info">
+<div class="product-brand">อะไหล่ไฟฟ้า</div>
+<div class="product-name">ทุ่น / คอยล์</div>
+<div class="product-desc">ทุ่นสำหรับเครื่องมือช่าง หลากหลายรุ่น วัสดุคุณภาพ ทนทานต่อการใช้งาน</div>
+<div class="product-footer">
+<div class="product-price">สอบถาม</div>
+<a href="https://line.me/ti/p/0625646351" target="_blank" class="product-action">ถาม Line →</a>
+</div>
+</div>
+</div>
+<div class="product-card fade-up">
+<div class="product-badge">🆕 ใหม่</div>
+<div class="product-img"><img src="products/ฟิลคอยล์.png" alt="ฟิลคอยล์"></div>
+<div class="product-info">
+<div class="product-brand">อะไหล่ไฟฟ้า</div>
+<div class="product-name">ฟิลคอยล์</div>
+<div class="product-desc">ฟิลคอยล์สำหรับเครื่องมือช่าง หลายรุ่นหลายขนาด เปลี่ยนง่าย ใช้งานได้จริง</div>
+<div class="product-footer">
+<div class="product-price">สอบถาม</div>
+<a href="https://line.me/ti/p/0625646351" target="_blank" class="product-action">ถาม Line →</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="section" id="categories" style="padding-top:20px">
+<div class="section-header">
+<div class="section-badge">📂 หมวดหมู่</div>
+<div class="section-title">ครบจบในที่เดียว</div>
+</div>
+<div class="cat-grid">
+<div class="cat-card"><div class="cat-icon">⚙️</div><div class="cat-name">อะไหล่สว่าน</div></div>
+<div class="cat-card"><div class="cat-icon">🔧</div><div class="cat-name">อะไหล่เครื่องเจียร์</div></div>
+<div class="cat-card"><div class="cat-icon">🪚</div><div class="cat-name">อะไหล่เลื่อย</div></div>
+<div class="cat-card"><div class="cat-icon">🔩</div><div class="cat-name">ลูกปืน / ดอกสว่าน</div></div>
+<div class="cat-card"><div class="cat-icon">⚡</div><div class="cat-name">อะไหล่ไฟฟ้า</div></div>
+<div class="cat-card"><div class="cat-icon">🔍</div><div class="cat-name">รับหาอะไหล่พิเศษ</div></div>
+</div>
+</section>
+
+<!-- TRUST -->
+<section class="section">
+<div class="section-header">
+<div class="section-badge">🏆 ทำไมต้องเรา</div>
+<div class="section-title">เราไม่ใช่แค่ร้านขายของ</div>
+</div>
+<div class="trust-grid">
+<div class="trust-card"><div class="trust-icon">🚀</div><div class="trust-title">ส่งเร็ว</div><div class="trust-text">มีสต็อกพร้อมส่ง จัดส่งทั่วไทย</div></div>
+<div class="trust-card"><div class="trust-icon">✅</div><div class="trust-title">อะไหล่คุณภาพดี</div><div class="trust-text">ราคาดี ใช้ได้จริง</div></div>
+<div class="trust-card"><div class="trust-icon">💬</div><div class="trust-title">ตอบเร็ว</div><div class="trust-text">แนะนำรุ่นที่ใช้ได้จริง ถามได้เลย</div></div>
+<div class="trust-card"><div class="trust-icon">📸</div><div class="trust-title">ส่งรูปมาได้</div><div class="trust-text">ส่งรูปมา เราหาอะไหล่ให้เอง</div></div>
+</div>
+</section>
+
+<!-- REVIEWS -->
+<section class="section" id="reviews">
+<div class="section-header">
+<div class="section-badge">⭐ รีวิวลูกค้า</div>
+<div class="section-title">ลูกค้าจริง ประสบการณ์จริง</div>
+</div>
+<div class="reviews-wrap">
+<div class="review-card fade-up">
+<div class="review-top">
+<div class="review-avatar">ส</div>
+<div class="review-meta"><div class="review-name">สมชาย</div><div class="review-date">มีนาคม 2026</div></div>
+</div>
+<div class="review-stars">⭐⭐⭐⭐⭐</div>
+<div class="review-text">ซื้อแปรงถ่าน Bosch มาใช้ ของดี ใส่ตรงรุ่น ใช้ได้เลย ส่งไวมาก วันต่อมาได้ของแล้ว ร้านนี้ตอบแชทเร็วดีครับ แนะนำ!</div>
+<div class="review-product">แปรงถ่าน Bosch GWS 7-100</div>
+</div>
+<div class="review-card fade-up">
+<div class="review-top">
+<div class="review-avatar">ว</div>
+<div class="review-meta"><div class="review-name">วิชัย</div><div class="review-date">กุมภาพันธ์ 2026</div></div>
+</div>
+<div class="review-stars">⭐⭐⭐⭐⭐</div>
+<div class="review-text">ตลับลูกปืนคุณภาพดีมาก เปลี่ยนเองได้ไม่ยาก ราคาสมเหตุสมผล จะกลับมาซื้ออีกครับ ของเยอะดีเลือกได้หลายรุ่น</div>
+<div class="review-product">ตลับลูกปืน Makita</div>
+</div>
+<div class="review-card fade-up">
+<div class="review-top">
+<div class="review-avatar">ธ</div>
+<div class="review-meta"><div class="review-name">ธนกร</div><div class="review-date">มีนาคม 2026</div></div>
+</div>
+<div class="review-stars">⭐⭐⭐⭐⭐</div>
+<div class="review-text">สั่งหัวสว่านมา ของตรงรุ่นดี ไม่มีปัญหา แพ็คมาดีมาก ไม่เสียหาย ร้านตอบไว ถามรุ่นไหนตอบได้เลย</div>
+<div class="review-product">หัวสว่าน DCA</div>
+</div>
+<div class="review-card fade-up">
+<div class="review-top">
+<div class="review-avatar">ป</div>
+<div class="review-meta"><div class="review-name">ปิยะ</div><div class="review-date">กุมภาพันธ์ 2026</div></div>
+</div>
+<div class="review-stars">⭐⭐⭐⭐⭐</div>
+<div class="review-text">สวิตซ์เครื่องบดเสีย ส่งรูปมาให้ร้านดู เขาหาให้ได้ตรงรุ่นเลย ส่งเร็วด้วย ของดีราคาดี จะซื้ออีกแน่นอนครับ</div>
+<div class="review-product">สวิตซ์หินเจียร์</div>
+</div>
+<div class="review-card fade-up">
+<div class="review-top">
+<div class="review-avatar">เ</div>
+<div class="review-meta"><div class="review-name">เกรียงไกร</div><div class="review-date">มกราคม 2026</div></div>
+</div>
+<div class="review-stars">⭐⭐⭐⭐⭐</div>
+<div class="review-text">ยกกล่องแปรงถ่านคุ้มมาก ซื้อแยกเยอะกว่านี้เยอะ ร้านบริการดี ถามอะไรตอบหมด ไม่แนะนำไม่ได้ครับ 👍</div>
+<div class="review-product">แปรงถ่าน CB411 ยกกล่อง</div>
+</div>
+<div class="review-card fade-up">
+<div class="review-top">
+<div class="review-avatar">น</div>
+<div class="review-meta"><div class="review-name">นภัสสร</div><div class="review-date">มีนาคม 2026</div></div>
+</div>
+<div class="review-stars">⭐⭐⭐⭐⭐</div>
+<div class="review-text">ฟิลคอยล์รุ่นหายาก หาที่อื่นไม่ได้ ร้านนี้มี! ส่งรูปมาถาม ตอบเลยว่ามีรุ่นไหน บริการดีมากจ้า</div>
+<div class="review-product">ฟิลคอยล์ Hitachi</div>
+</div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+<div class="contact-wrap">
+<div class="contact-left">
+<div class="section-badge">📞 ติดต่อเรา</div>
+<h2>ติดต่อ <span>VTN Tools</span></h2>
+<p>สอบถามรุ่น สั่งซื้อ หรือส่งรูปมาให้เราหาอะไหล่ให้</p>
+<div class="contact-item">
+<div class="contact-icon">📍</div>
+<div class="contact-detail"><div class="contact-label">ที่อยู่</div><div class="contact-value">105/123 ถ.เอกชัย แขวงคลองบางบอน เขตบางบอน กรุงเทพฯ 10150</div></div>
+</div>
+<div class="contact-item">
+<div class="contact-icon">🕐</div>
+<div class="contact-detail"><div class="contact-label">เวลาทำการ</div><div class="contact-value">จันทร์ - เสาร์ 08:00 - 17:30</div></div>
+</div>
+<div class="contact-item">
+<div class="contact-icon">📞</div>
+<div class="contact-detail"><div class="contact-label">โทรศัพท์</div><div class="contact-value">062-564-6351</div></div>
+</div>
+<div class="contact-item">
+<div class="contact-icon">💬</div>
+<div class="contact-detail"><div class="contact-label">Line</div><div class="contact-value">@0625646351</div></div>
+</div>
+<div class="contact-links">
+<a href="https://line.me/ti/p/0625646351" target="_blank" class="contact-link cl-line">💬 Line</a>
+<a href="https://www.facebook.com/VTNELECTRIC" target="_blank" class="contact-link cl-fb">📘 Facebook</a>
+<a href="https://shopee.co.th/shop/1684979116" target="_blank" class="contact-link cl-shopee">🛒 Shopee</a>
+</div>
+</div>
+<div class="contact-right">
+<div class="contact-qr-box">
+<img src="icons/qr code line id.jpg" alt="Line QR Code">
+<div class="qr-label">สแกนเพิ่มเพื่อน Line</div>
+</div>
+<div class="contact-shop-img">
+<img src="about/เกี่ยวกับร้าน.png" alt="ร้าน VTN Tools">
+</div>
+</div>
+</div>
+</section>
+
+<!-- MAP -->
+<div class="map-wrap">
+<div class="map-frame">
+<iframe src="https://maps.google.com/maps?q=105/123+ถ.เอกชัย+บางบอน+กรุงเทพฯ+10150&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="250" style="border:0" allowfullscreen loading="lazy"></iframe>
+</div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+<div class="footer-logo">
+<img src="logo/LOGO-VTN-PNG.png" alt="VTN Tools">
+<div class="footer-brand">VTN<span>Tools</span></div>
+</div>
+<p class="footer-text">© 2026 VTN Tools — ศูนย์รวมอะไหล่เครื่องมือช่าง</p>
+<p class="footer-brands">DCA · Makita · Maktec · Bosch · Hitachi · INGCO</p>
+</footer>
+
+<!-- FLOATING LINE -->
+<a href="https://line.me/ti/p/0625646351" target="_blank" class="float-line" title="สอบถามผ่าน Line">💬</a>
+
+<script>
+const observer=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.1});
+document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:'smooth'})})});
+</script>
+</body>
+</html>
